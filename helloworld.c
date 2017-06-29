@@ -2,9 +2,7 @@
  
 int main()
 {
-  char string[] = "Hello World";
- 
-  printf("%s\n", string);
+  printf("Hello World");
  
   return 0;
 }
