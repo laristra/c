@@ -1,11 +1,7 @@
 #include <stdio.h>
-printf();
-int main() 
+ 
+int main()
 {
-    printf("Hello World\n");
-    return 0;
- }
-
-
-/** \brief a helloworld program in c
- */
+  printf("Hello world\n");
+  return 0;
+}
