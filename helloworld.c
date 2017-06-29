@@ -1,5 +1,10 @@
-#include<stdio.h>
-main() 
+#include <stdio.h>
+ 
+int main()
 {
-  printf("Hello world");
+  char string[] = "Hello World";
+ 
+  printf("%s\n", string);
+ 
+  return 0;
 }
