@@ -36,7 +36,7 @@ after_success:
 - mv deploy ~/.ssh/id_rsa
 - chmod 600 ~/.ssh/id_rsa
 - chmod +x generateDocumentationAndDeploy.sh
-- if [[ ${TRAVIS_JOB_NUMBER} = *.1 ]]; then ./generateDocumentationAndDeploy.sh fi
+- if [[ ${TRAVIS_JOB_NUMBER} = *.1 ]]; then ./generateDocumentationAndDeploy.sh; fi
 cache:
   ccache: true
   directories:
