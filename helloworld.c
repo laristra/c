@@ -2,7 +2,7 @@
  
 /// \file
 
-/** \brief a hello program in c
+/** \brief a helloworld program in c
  */
 int main()
 {
