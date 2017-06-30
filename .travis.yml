@@ -1,43 +1,53 @@
 language: c
+
 sudo: required
+
 dist: trusty
+
 branches:
   except:
-  - gh-pages
+    - gh-pages
+  
 env:
   global:
-  - DOXYFILE: $TRAVIS_BUILD_DIR/DOXYFILE
+    - DOXYFILE: $TRAVIS_BUILD_DIR/DOXYFILE
+  
 addons:
   sonarcloud:
     organization: laurelmcintyre-github
   apt:
     packages:
-    - doxygen
-    - doxygen-doc
-    - doxygen-latex
-    - doxygen-gui
-    - graphviz
+      - doxygen
+      - doxygen-doc
+      - doxygen-latex
+      - doxygen-gui
+      - graphviz
+    
 before_install:
-- ccache -z
+  - ccache -z
+
 script:
-- ${CC} --coverage -c helloworld.c -o helloworld.o
-- ${CC} --coverage helloworld.o -o helloworld
-- ./helloworld
-- sonar-scanner
+  - ${CC} --coverage -c helloworld.c -o helloworld.o
+  - ${CC} --coverage helloworld.o -o helloworld
+  - ./helloworld
+  - sonar-scanner
+
 compiler:
-- gcc
-- clang
+  - gcc
+  - clang
+
 after_success:
-- ccache -s
-- if [ ${CC} = clang ]; then bash <(curl -s https://codecov.io/bash) -F ${CC} --gcov-exec
+  - ccache -s
+  - if [ ${CC} = clang ]; then bash <(curl -s https://codecov.io/bash) -F ${CC} --gcov-exec
   "llvm-cov gcov"; else bash <(curl -s https://codecov.io/bash) -F ${CC}; fi
-- cd $TRAVIS_BUILD_DIR
-- openssl aes-256-cbc -K $encrypted_90e5b1967e19_key -iv $encrypted_90e5b1967e19_iv -in deploy.enc -out ./deploy -d
-- mv deploy ~/.ssh/id_rsa
-- chmod 600 ~/.ssh/id_rsa
-- chmod +x generateDocumentationAndDeploy.sh
-- if [[ ${TRAVIS_JOB_NUMBER} = *.1 ]]; then ./generateDocumentationAndDeploy.sh; fi
+  - cd $TRAVIS_BUILD_DIR
+  - openssl aes-256-cbc -K $encrypted_90e5b1967e19_key -iv $encrypted_90e5b1967e19_iv -in deploy.enc -out ./deploy -d
+  - mv deploy ~/.ssh/id_rsa
+  - chmod 600 ~/.ssh/id_rsa
+  - chmod +x generateDocumentationAndDeploy.sh
+  - if [[ ${TRAVIS_JOB_NUMBER} = *.1 ]]; then ./generateDocumentationAndDeploy.sh; fi
+
 cache:
   ccache: true
   directories:
-  - $HOME/.sonar
+    - $HOME/.sonar
