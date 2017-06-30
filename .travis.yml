@@ -39,7 +39,7 @@ compiler:
 after_success:
   - ccache -s
   - if [ ${CC} = clang ]; then bash <(curl -s https://codecov.io/bash) -F ${CC} --gcov-exec
-  "llvm-cov gcov"; else bash <(curl -s https://codecov.io/bash) -F ${CC}; fi
+    "llvm-cov gcov"; else bash <(curl -s https://codecov.io/bash) -F ${CC}; fi
   - cd $TRAVIS_BUILD_DIR
   - openssl aes-256-cbc -K $encrypted_90e5b1967e19_key -iv $encrypted_90e5b1967e19_iv -in deploy.enc -out ./deploy -d
   - mv deploy ~/.ssh/id_rsa
